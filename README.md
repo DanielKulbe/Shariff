@@ -17,6 +17,7 @@ Licensed under the [MIT License (MIT)](https://github.com/heise/shariff/blob/mas
 This Software includes the Font-Awsome Webfont.
 
 Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome
+
 License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
 
 ## Options
