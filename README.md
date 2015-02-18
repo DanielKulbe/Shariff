@@ -6,23 +6,23 @@ Shariff enables website users to share their favorite content without compromisi
 
 Facebook, Google+ and Twitter supply official sharing code snippets which quietly siphon personal data from all page visitors. Shariff enables visitors to see how popular your page is on Facebook and share your content with others without needless data leaks.
 
-### Original software
+## Original software
 Shariff `(/ˈʃɛɹɪf/)` is an open-source, low-maintenance, high-privacy solution, [originally maintained by German computer magazine c't and heise online](http://heiseonline.github.io/shariff/).
 
 Shariff consists of two parts: a simple JavaScript client library and an optional server-side component. The latter fetches the number of likes, tweets and plus-ones. Share buttons and share counts work without a connection between your visitors' browsers and *social networks* (unless they decide to share, of course).
 
 Licensed under the [MIT License (MIT)](https://github.com/heise/shariff/blob/master/LICENSE.txt)
 
-### Font-Awesome
+## Font-Awesome
 This Software includes the Font-Awsome Webfont.
 
 Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome
 License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
 
-### Options
+## Options
 Edit in the module´s `config.yml`.
 
-##### General
+### General
 | Option | Description | Default |
 |--------|-------------|---------|
 | `count` | Enables the count feature.  | `false` |
@@ -34,7 +34,7 @@ Edit in the module´s `config.yml`.
 | `extra` | An array of extra buttons names to be enabled. Same as `services`, but without a server callback. | (all enabled) |
 | `server` | Server backend configuration. | (see below) |
 
-##### Service / Extra
+### Service / Extra
 Individual service and extra button settings.
 
 | Option | Description |
@@ -45,7 +45,7 @@ Individual service and extra button settings.
 | `icon` | If set an icon will be prepended the this CSS class. By default this is used with Font-Awesome. |
 | `url` | The service´s base url. The the `client` param settings to contruct the query string. |
 
-##### Client
+### Client
 Javascript specifig settings.
 
 | Option | Description | Default |
@@ -54,7 +54,7 @@ Javascript specifig settings.
 | `referrer` | A string that will be appended to the share url. Can be disabled using `null`. | `null` |
 | `params` | Query parameter for the `services` and `extra` buttons that will be appended to OR replaced the share url. The Token pattern below are available for automatic replacement. | (not set) |
 
-##### Replacement token
+### Replacement token
 For Client parameters.
 
 | Token | Replaced with |
@@ -66,7 +66,7 @@ For Client parameters.
 | `{{TEXT}}` | the og:description OR descrition meta |
 | `{{IMAGE}}` | og:image, if available |
 
-##### Server
+### Server
 Server specific setup.
 
 | Option | Description | Default |
