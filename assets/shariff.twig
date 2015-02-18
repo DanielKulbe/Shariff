@@ -1,0 +1,20 @@
+
+<ul class="shariff shariff-{{ theme }} shariff-orientation-{{ orientation }}" data-backend="{{ config.backend }}" data-url="{{ config.url }}" data-referrer="{{ config.referrer }}" data-params="{{ config.params|json_encode }}">
+{% for service in services %}
+    <li class="shariff-button {{ service.name|lower }}">
+        <a href="{{ service.url }}" rel="popup" title="{{ __(service.title) }}">
+            {% if service.icon is defined %}<span class="{{ service.icon }}"></span>{% endif %}
+            <span class="share-text">{{ __(service.text) }}</span>
+            {% if count is same as(true) %}<span class="share-count"></span>{% endif %}
+        </a>
+    </li>
+{% endfor %}
+{% for service in extra %}
+    <li class="shariff-button {{ service.name|lower }}">
+        <a href="{{ service.url }}" title="{{ __(service.title) }}">
+            {% if service.icon is defined %}<span class="{{ service.icon }}"></span>{% endif %}
+            <span class="share-text">{{ __(service.text) }}</span>
+        </a>
+    </li>
+{% endfor %}
+</ul>

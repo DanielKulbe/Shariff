@@ -1,0 +1,35 @@
+{
+    "name": "danielkulbe/shariff",
+    "description": "Shariff enables website users to share their favorite content without compromising their privacy.",
+    "type": "bolt-extension",
+    "keywords": [
+        "share", "social", "google", "google+", "facebook", "twitter", "whatsapp", "mail"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Kulbe",
+            "email": "info@daniel-kulbe.de"
+        }
+    ],
+    "require": {
+        "bolt/bolt": ">=2.0.0,<3.0.0"
+    },
+    "autoload": {
+        "files": [
+            "init.php"
+        ],
+        "psr-4": {
+            "Bolt\\Extension\\DanielKulbe\\Shariff\\": [
+                "",
+                "src/"
+            ],
+            "Bolt\\Extension\\DanielKulbe\\Shariff\\Backend\\" : [
+                "src/Backend/"
+            ],
+        }
+    },
+    "extra": {
+        "bolt-assets": "assets"
+    }
+}

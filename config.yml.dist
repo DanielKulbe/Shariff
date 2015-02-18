@@ -1,0 +1,156 @@
+###                       ###
+#   Shariff configuration   #
+###                       ###
+
+# enable ser side counter
+count: true
+
+# add font-awesome 4.3.0 stylesheet
+fontawesome: true
+
+# button theme
+# available: standard - colored buttons with white text
+#            white    - white background with colored text
+#            custom   - no stylesheet will be added
+theme: standard
+
+# if set to vertical, the buttons will be stacked
+orientation: horizontal
+
+# frontend options
+# available tokens: {{URL}}   - the current url or the defined client url
+#                   {{NAME}}  - the og:site_name meta OR the base URL
+#                   {{TITLE}} - the og:title meta OR ccontent of title
+#                   {{SHARE}} - the share-text, a combination of og:title
+#                               and og:site_name OR the content of title
+#                   {{TEXT}}  - the og:description OR descrition meta
+#                   {{IMAGE}} - og:image, if available
+client:
+    url: null # a global url to share
+    referrer: null # additional tracking query params
+    params:
+        facebook:
+            u: '{{URL}}'
+        googleplus:
+            url: '{{URL}}'
+        linkedin:
+            url: '{{URL}}'
+            title: '{{TITLE}}'
+            summary: '{{TEXT}}'
+            source: '{{NAME}}'
+        mail:
+            subject: '{{URL}}'
+            body: '{{SHARE}}%20{{URL}}'
+        pinterest:
+            url: '{{URL}}'
+            media: '{{IMAGE}}'
+            description: '{{SHARE}}'
+        reddit:
+            url: '{{URL}}'
+            title: '{{SHARE}}'
+        stumbleupon:
+            url: '{{URL}}'
+            title: '{{SHARE}}'
+        twitter:
+            text: '{{SHARE}}'
+            url: '{{URL}}'
+#           via: null
+        whatsapp:
+            text: '{{URL}}%20{{SHARE}}'
+        xing:
+            url: '{{URL}}'
+
+
+# Enabled services
+services:
+    - name: Facebook
+      title: "Share on Facebook"
+      text: "share"
+      icon: icon icon-facebook
+      url: https://www.facebook.com/sharer/sharer.php
+    - name: GooglePlus
+      title: "Share on Google+"
+      text: "+1"
+      icon: icon icon-google-plus
+      url: https://plus.google.com/share
+    - name: LinkedIn
+      title: "Share on LinkedIn"
+      text: "share"
+      icon: icon icon-linkedin
+      url: https://www.linkedin.com/shareArticle?mini=true
+    - name: Pinterest
+      title: "Share on Pinterst"
+      text: "Pin It"
+      icon: icon icon-pinterest-p
+      url: http://pinterest.com/pin/create/button/
+    - name: Reddit
+      title: "Share on Reddit"
+      text: "reddit this"
+      icon: icon icon-reddit
+      url: https://www.reddit.com/submit
+    - name: StumbleUpon
+      title: "Share on StumbleUpon"
+      text: "Stumble"
+      icon: icon icon-stumbleupon
+      url: http://www.stumbleupon.com/submit
+    - name: Twitter
+      title: "Share on Twitter"
+      text: "tweet"
+      icon: icon icon-twitter
+      url: https://twitter.com/intent/tweet
+    - name: Xing
+      title: "Share on XING"
+      text: "XING"
+      icon: icon icon-xing
+      url: https://www.xing.com/spi/shares/new
+
+
+# Extra buttons (client only)
+extra:
+    - name: WhatsApp
+      title: Share on Whatsapp
+      text: share
+      icon: fa fa-whatsapp
+      url: whatsapp://send
+    - name: Mail
+      title: Send by email
+      text: mail
+      icon: fa fa-fa fa-envelope
+      url: mailto:user@example.com
+#   - name: Info
+#     title: more information
+#     text: Info
+#     icon: fa fa-info
+#     url: /path-to-privacy
+
+
+server:
+
+# the domain allowed to create share count, default to host url
+#   domain: example.com
+
+# Guzzle HTTP client configuration
+#   guzzle:
+#      headers:
+#          User-Agent: testing/1.0
+#          Accept: application/json
+#          X-Foo:
+#              - Bar
+#              - Baz
+#      query:
+#          testing: 123
+#      auth:
+#          - username
+#          - password
+#      proxy: tcp://localhost:80
+#      timeout: 5
+#      allow_redirects: false
+
+# Facebook app id for tracking
+#   facebook:
+#      app_id: YOUR_APP_ID
+#      secret: YOUR_APP_SECRET
+
+# Google API Developer key
+#   googleplus:
+#       dev_key: YOUR_DEVELOPER_KEY
