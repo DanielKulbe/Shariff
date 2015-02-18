@@ -11,7 +11,7 @@ Shariff `(/ˈʃɛɹɪf/)` is an open-source, low-maintenance, high-privacy solut
 
 Shariff consists of two parts: a simple JavaScript client library and an optional server-side component. The latter fetches the number of likes, tweets and plus-ones. Share buttons and share counts work without a connection between your visitors' browsers and *social networks* (unless they decide to share, of course).
 
-Licensed under the [MIT License (MIT)](https://github.com/heise/shariff/blob/master/LICENSE.txt)
+Licensed under the [MIT License (MIT)](https://github.com/heiseonline/shariff/blob/master/LICENSE.txt)
 
 ## Font-Awesome
 This Software includes the Font-Awsome Webfont.
