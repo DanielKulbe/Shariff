@@ -26,7 +26,7 @@
             ],
             "Bolt\\Extension\\DanielKulbe\\Shariff\\Backend\\" : [
                 "src/Backend/"
-            ],
+            ]
         }
     },
     "extra": {
