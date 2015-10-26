@@ -38,7 +38,7 @@
     },
     "extra": {
         "bolt-assets": "assets",
-        "bolt-icon": "assets/shariff.svg",
+        "bolt-icon": "assets/shariff.png",
         "branch-alias" : {
             "dev-master" : "1.0.x-dev"
         }
