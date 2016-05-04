@@ -2,7 +2,7 @@
 
 namespace Bolt\Extension\DanielKulbe\Shariff\Backend;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 
 abstract class Request
 {

@@ -4,7 +4,7 @@ namespace Bolt\Extension\DanielKulbe\Shariff\Backend;
 
 use Guzzle\Common\Event;
 use Guzzle\Stream\Stream;
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Message\Response;
 
 class Pinterest extends Request implements ServiceInterface
 {
