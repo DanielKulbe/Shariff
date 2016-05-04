@@ -2,8 +2,8 @@
 
 namespace Bolt\Extension\DanielKulbe\Shariff\Backend;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Pool;
+use GuzzleHttp\Client;
+use GuzzleHttp\Pool;
 
 class Controller
 {
