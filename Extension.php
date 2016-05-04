@@ -42,7 +42,7 @@ class Extension extends BaseExtension
     public function initialize()
     {
         // Register service route
-        $this->app->match('/async/shariff', array(new Shariff($this->app), 'shariff'));
+        $this->app->match('/shariff', array(new Shariff($this->app), 'shariff'));
 
         // Add Extension template path, register Twig function "shariff", add script and stylesheet
         if ($this->app['config']->getWhichEnd() == 'frontend') {
@@ -117,7 +117,7 @@ class Extension extends BaseExtension
             'count' => $this->config['count'] == true ? true : false,
             'theme' => in_array($this->config['theme'], Extension::$THEMES) ? $this->config['theme'] : 'standard',
             'orientation' => $this->config['orientation'] == 'vertical' ? 'vertical' : 'horizontal',
-            'config' => array_merge($this->config['client'], $config, array('backend' => $this->config['count'] == true ? '/async/shariff' : null)),
+            'config' => array_merge($this->config['client'], $config, array('backend' => $this->config['count'] == true ? '/shariff' : null)),
             'services' => $this->config['services'],
             'extra' => $this->config['extra']
         );
