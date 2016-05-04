@@ -5,8 +5,6 @@ namespace Bolt\Extension\DanielKulbe\Shariff;
 use Silex;
 use Silex\Application;
 
-use Guzzle\Http\Client;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,6 +24,7 @@ class Shariff
     {
         $this->app = $app;
 
+
         $config = $this->app['extensions.' . Extension::NAME]->config['server'];
 
         $services = array_map(function ($service) {
@@ -33,9 +32,10 @@ class Shariff
             return false;
         }, $this->app['extensions.' . Extension::NAME]->config['services']);
 
-        $clientOptions = isset($config['guzzle']) ? $config['guzzle'] : array();
+        /** @var \Guzzle\Service\Client $client */
+        $client = $this->app['guzzle.client'];
+        if(isset($config['guzzle'])) $client->configureDefaults($config['guzzle']);
 
-        $client  = new Client(array('defaults' => $clientOptions));
         $service = new Service($client);
 
         $this->shariff = new Controller(
