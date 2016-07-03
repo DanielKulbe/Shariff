@@ -42,7 +42,7 @@ class Service
             $service = $this->serviceMap[$serviceName];
         }
         else {
-            $serviceClass = 'Bolt\Extension\DanielKulbe\Shariff\Backend\\'.$serviceName;
+            $serviceClass = 'Bolt\Extension\DanielKulbe\Shariff\\'.$serviceName;
             $service = new $serviceClass($this->client);
         }
 

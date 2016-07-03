@@ -30,9 +30,6 @@
             "Bolt\\Extension\\DanielKulbe\\Shariff\\": [
                 "",
                 "src/"
-            ],
-            "Bolt\\Extension\\DanielKulbe\\Shariff\\Backend\\" : [
-                "src/Backend/"
             ]
         }
     },
