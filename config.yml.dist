@@ -93,11 +93,6 @@ services:
       text: "Stumble"
       icon: icon icon-stumbleupon
       url: http://www.stumbleupon.com/submit
-    - name: Twitter
-      title: "Share on Twitter"
-      text: "tweet"
-      icon: icon icon-twitter
-      url: https://twitter.com/intent/tweet
     - name: Xing
       title: "Share on XING"
       text: "XING"
@@ -107,6 +102,11 @@ services:
 
 # Extra buttons (client only)
 extra:
+    - name: Twitter
+      title: "Share on Twitter"
+      text: "tweet"
+      icon: icon icon-twitter
+      url: https://twitter.com/intent/tweet
     - name: WhatsApp
       title: Share on Whatsapp
       text: share

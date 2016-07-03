@@ -38,7 +38,7 @@ class Extension extends BaseExtension
      * @var array
      */
     protected static $COUNTER = array(
-        'Facebook', 'GooglePlus', 'LinkedIn', 'Pinterest', 'Reddit', 'StumbleUpon', 'Twitter', 'Xing'
+        'Facebook', 'GooglePlus', 'LinkedIn', 'Pinterest', 'Reddit', 'StumbleUpon', 'Xing'
     );
 
 
@@ -159,6 +159,7 @@ class Extension extends BaseExtension
 
     public function counter ()
     {
+        \Symfony\Component\VarDumper\VarDumper::dump(debug_backtrace($this->app['request']));
         return $this->app->json(
             $this->shariff->get($this->app['request']->get('url'))
         );
