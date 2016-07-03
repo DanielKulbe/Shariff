@@ -51,7 +51,7 @@ class Extension extends BaseExtension
     {
         // Register Shariff Backend
         $counters = Extension::getAvailableCounter();
-        $services = array_map(function ($service) use $counters {
+        $services = array_map(function ($service) use ($counters) {
             if ( in_array($service['name'], $counters) ) return $service['name'];
             return false;
         }, $this->config['services']);
