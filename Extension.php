@@ -15,6 +15,14 @@ class Extension extends BaseExtension
      */
     const NAME = 'Shariff';
 
+
+    /**
+     * Backend
+     *
+     * @var  Backend
+     */
+    protected $shariff;
+
     /**
      * Available themes
      *
@@ -41,8 +49,29 @@ class Extension extends BaseExtension
      */
     public function initialize()
     {
+        // Register Shariff Backend
+        $counters = Extension::getAvailableCounter();
+        $services = array_map(function ($service) use $counters {
+            if ( in_array($service['name'], $counters) ) return $service['name'];
+            return false;
+        }, $this->config['services']);
+
+        /** @var \Guzzle\Service\Client $client */
+        $client = $this->app['guzzle.client'];
+        if(isset($this->config['server']['guzzle'])) $client->configureDefaults($this->config['server']['guzzle']);
+
+        $service = new Service($client);
+
+        $this->shariff = new Controller(
+            md5(json_encode($this->config['server'])),
+            $this->app['cache'],
+            $client,
+            $this->config['server']['domain'],
+            $service->getServicesByName($services, $this->config['server'])
+        );
+
         // Register service route
-        $this->app->match('/shariff', array(new Shariff($this->app), 'shariff'));
+        $this->app->match('/shariff/counter', array($this), 'counter'));
 
         // Add Extension template path, register Twig function "shariff", add script and stylesheet
         if ($this->app['config']->getWhichEnd() == 'frontend') {
@@ -100,7 +129,8 @@ class Extension extends BaseExtension
      *
      * @return array
      */
-    public static function getAvailableCounter () {
+    public static function getAvailableCounter ()
+    {
         return Extension::$COUNTER;
     }
 
@@ -117,7 +147,7 @@ class Extension extends BaseExtension
             'count' => $this->config['count'] == true ? true : false,
             'theme' => in_array($this->config['theme'], Extension::$THEMES) ? $this->config['theme'] : 'standard',
             'orientation' => $this->config['orientation'] == 'vertical' ? 'vertical' : 'horizontal',
-            'config' => array_merge($this->config['client'], $config, array('backend' => $this->config['count'] == true ? '/shariff' : null)),
+            'config' => array_merge($this->config['client'], $config, array('backend' => $this->config['count'] == true ? '/shariff/counter' : null)),
             'services' => $this->config['services'],
             'extra' => $this->config['extra']
         );
@@ -125,5 +155,12 @@ class Extension extends BaseExtension
         $str = $this->app['render']->render('@Shariff/shariff.twig', $twigValues);
 
         return new \Twig_Markup($str, 'UTF-8');
+    }
+
+    public function counter ()
+    {
+        return $this->app->json(
+            $this->shariff->get($this->app['request']->get('url'))
+        );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bolt\Extension\DanielKulbe\Shariff\Backend;
+namespace Bolt\Extension\DanielKulbe\Shariff;
 
 class Facebook extends Request implements ServiceInterface
 {
