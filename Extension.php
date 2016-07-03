@@ -71,7 +71,7 @@ class Extension extends BaseExtension
         );
 
         // Register service route
-        $this->app->match('/shariff/counter', array($this), 'counter'));
+        $this->app->match('/shariff/counter', array($this, 'counter'));
 
         // Add Extension template path, register Twig function "shariff", add script and stylesheet
         if ($this->app['config']->getWhichEnd() == 'frontend') {
