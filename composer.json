@@ -16,6 +16,10 @@
         {
             "type": "vcs",
             "url": "http://gitlab.daniel-kulbe.de/root/bolt-shariff.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:DanielKulbe/SiteAddress.git"
         }
     ],
     "require": {
