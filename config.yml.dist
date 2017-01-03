@@ -29,8 +29,17 @@ client:
     url: null # a global url to share
     referrer: null # additional tracking query params
     params:
+        addthis:
+            url: '{{URL}}'
+            title: '{{TITLE}}'
+            description: '{{TEXT}}'
         facebook:
             u: '{{URL}}'
+        flattr:
+            url: '{{URL}}'
+            title: '{{TITLE}}'
+            description: '{{TEXT}}'
+#           user_id: null
         googleplus:
             url: '{{URL}}'
         linkedin:
@@ -63,11 +72,21 @@ client:
 
 # Enabled services
 services:
+    - name: AddThis
+      title: "Share on AddThis"
+      text: "share"
+      icon: icon icon-plus
+      url: http://api.addthis.com/oexchange/0.8/offer
     - name: Facebook
       title: "Share on Facebook"
       text: "share"
       icon: icon icon-facebook
       url: https://www.facebook.com/sharer/sharer.php
+    - name: Flattr
+      title: "Flattr this"
+      text: "flattr"
+      icon: icon icon-money
+      url: https://flattr.com/submit/auto
     - name: GooglePlus
       title: "Share on Google+"
       text: "+1"
@@ -127,7 +146,9 @@ extra:
 server:
 
 # the domain allowed to create share count, default to host url
-#   domain: example.com
+#   domains:
+#      - example.com
+#      - other-example.com
 
 # Guzzle HTTP client configuration
 #   guzzle:

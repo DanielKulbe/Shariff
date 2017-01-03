@@ -2,25 +2,41 @@
 
 namespace Bolt\Extension\DanielKulbe\Shariff;
 
+/**
+ * Class Reddit.
+ */
 class Reddit extends Request implements ServiceInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'reddit';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRequest($url)
     {
-        return $this->createRequest('https://www.reddit.com/api/info.json?url='.urlencode($url));
+        return new \GuzzleHttp\Message\Request('GET', 'https://www.reddit.com/api/info.json?url='.urlencode($url));
     }
 
-    public function extractCount($data)
+    /**
+     * {@inheritdoc}
+     */
+    public function extractCount(array $data)
     {
         $count = 0;
-        foreach ($data['data']['children'] as $child) {
-            $count += $child['data']['score'];
+        if (!empty($data['data']['children'])) {
+            foreach ($data['data']['children'] as $child) {
+                if (!empty($child['data']['score'])) {
+                    $count += $child['data']['score'];
+                }
+            }
         }
+
         return $count;
     }
 }

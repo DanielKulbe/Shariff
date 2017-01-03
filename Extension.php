@@ -5,6 +5,7 @@ namespace Bolt\Extension\DanielKulbe\Shariff;
 
 use Bolt\Application;
 use Bolt\BaseExtension;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class Extension extends BaseExtension
 {
@@ -38,7 +39,7 @@ class Extension extends BaseExtension
      * @var array
      */
     protected static $COUNTER = array(
-        'Facebook', 'GooglePlus', 'LinkedIn', 'Pinterest', 'Reddit', 'StumbleUpon', 'Xing'
+        'AddThis', 'Facebook', 'Flattr', 'GooglePlus', 'LinkedIn', 'Pinterest', 'Reddit', 'StumbleUpon', 'Xing'
     );
 
 
@@ -60,15 +61,22 @@ class Extension extends BaseExtension
         $client = $this->app['guzzle.client'];
         if(isset($this->config['server']['guzzle'])) $client->configureDefaults($this->config['server']['guzzle']);
 
-        $service = new Service($client);
+        // Backwards compatibility
+        $domains = $this->config['server']['domains'];
+        if (isset($this->config['server']['domain'])) {
+            array_push($domains, $this->config['server']['domain']);
+        }
 
-        $this->shariff = new Controller(
+        $serviceFactory = new ServiceFactory($client);
+
+        $this->shariff = new BackendManager(
             md5(json_encode($this->config['server'])),
             $this->app['cache'],
             $client,
-            $this->config['server']['domain'],
-            $service->getServicesByName($services, $this->config['server'])
+            $domains,
+            $serviceFactory->getServicesByName($services, $this->config['server'])
         );
+        $this->shariff->setLogger($this->app['logger.system']);
 
         // Register service route
         $this->app->match('/shariff/counter', array($this, 'counter'));
@@ -118,7 +126,7 @@ class Extension extends BaseExtension
             'services' => array(),
             'extra' => array(),
             'server' => array(
-                'domain' => $this->app['paths']['hostname']
+                'domains' => array($this->app['paths']['hostname'])
             ),
         );
     }
@@ -157,10 +165,10 @@ class Extension extends BaseExtension
         return new \Twig_Markup($str, 'UTF-8');
     }
 
-    public function counter ()
+    public function counter (Application $app, HttpRequest $request)
     {
-        return $this->app->json(
-            $this->shariff->get($this->app['request']->get('url'))
+        return $app->json(
+            $this->shariff->get($request->get('url'))
         );
     }
 }

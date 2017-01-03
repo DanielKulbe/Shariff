@@ -3,16 +3,16 @@
 namespace Bolt\Extension\DanielKulbe\Shariff;
 
 /**
- * Class StumbleUpon.
+ * Class Flattr.
  */
-class StumbleUpon extends Request implements ServiceInterface
+class Flattr extends Request implements ServiceInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'stumbleupon';
+        return 'flattr';
     }
 
     /**
@@ -22,7 +22,7 @@ class StumbleUpon extends Request implements ServiceInterface
     {
         return new \GuzzleHttp\Message\Request(
             'GET',
-            'https://www.stumbleupon.com/services/1.01/badge.getinfo?url='.urlencode($url)
+            'https://api.flattr.com/rest/v2/things/lookup/?url='.urlencode($url)
         );
     }
 
@@ -31,6 +31,6 @@ class StumbleUpon extends Request implements ServiceInterface
      */
     public function extractCount(array $data)
     {
-        return (isset($data['result']['views'])) ? $data['result']['views'] + 0 : 0;
+        return (isset($data['flattrs'])) ? $data['flattrs'] : 0;
     }
 }

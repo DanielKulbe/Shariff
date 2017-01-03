@@ -2,20 +2,29 @@
 
 namespace Bolt\Extension\DanielKulbe\Shariff;
 
+use GuzzleHttp\Stream;
+
+/**
+ * Class GooglePlus.
+ */
 class GooglePlus extends Request implements ServiceInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'googleplus';
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
     public function getRequest($url)
     {
-        $key = isset($this->config['dev_key']) ? $this->config['dev_key'] : 'AIzaSyCKSbrvQasunBoV16zDH9R33D88CeLr9gQ';
+        $gPlusUrl = 'https://clients6.google.com/rpc?key=' . (isset($this->config['dev_key']) ? $this->config['dev_key'] : 'AIzaSyCKSbrvQasunBoV16zDH9R33D88CeLr9gQ');
 
-        $request = $this->createRequest('https://clients6.google.com/rpc?key=' . $key, 'POST');
-        $request->setBody(json_encode(array(
+        $json = array(
             'method' => 'pos.plusones.get',
             'id'     => 'p',
             'params' => array(
@@ -28,13 +37,22 @@ class GooglePlus extends Request implements ServiceInterface
             'jsonrpc'    => '2.0',
             'key'        => 'p',
             'apiVersion' => 'v1'
-        )));
+        );
 
-        return $request;
+        $body = Stream\Utils::create(json_encode($json));
+
+        return new \GuzzleHttp\Message\Request('POST', $gPlusUrl, array(), $body);
     }
 
-    public function extractCount($data)
+    /**
+     * {@inheritdoc}
+     */
+    public function extractCount(array $data)
     {
-        return $data['result']['metadata']['globalCounts']['count'];
+        if (!empty($data['result']['metadata']['globalCounts']['count'])) {
+            return $data['result']['metadata']['globalCounts']['count'];
+        }
+
+        return 0;
     }
 }

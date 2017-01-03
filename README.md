@@ -40,7 +40,7 @@ Individual service and extra button settings.
 
 | Option | Description |
 |--------|-------------|
-| `name` | The service name. For `services` the name will be matched against available services: `Facebook`, `GooglePlus`, `LinkedIn`, `Pinterest`, `Reddit`, `StumbleUpon`, `Twitter`, `Xing` |
+| `name` | The service name. For `services` the name will be matched against available services: `AddThis`, `Facebook`, `Flattr`, `GooglePlus`, `LinkedIn`, `Pinterest`, `Reddit`, `StumbleUpon`, `Twitter`, `Xing` |
 | `title` | The button´s title text. |
 | `text` | The button text. |
 | `icon` | If set an icon will be prepended the this CSS class. By default this is used with Font-Awesome. |

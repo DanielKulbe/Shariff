@@ -2,23 +2,35 @@
 
 namespace Bolt\Extension\DanielKulbe\Shariff;
 
+/**
+ * Class Xing.
+ */
 class Xing extends Request implements ServiceInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'xing';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRequest($url)
     {
-        $request = $this->createRequest('https://www.xing-share.com/spi/shares/statistics', 'POST');
-        $request->setPostField('url', $url);
-        return $request;
+        return new \GuzzleHttp\Message\Request(
+            'POST',
+            'https://www.xing-share.com/spi/shares/statistics?url='.urlencode($url)
+        );
     }
 
-    public function extractCount($data)
+    /**
+     * {@inheritdoc}
+     */
+    public function extractCount(array $data)
     {
-        return $data['share_counter'];
+        return isset($data['share_counter']) ? $data['share_counter'] : 0;
     }
 }

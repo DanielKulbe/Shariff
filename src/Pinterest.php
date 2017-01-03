@@ -2,32 +2,43 @@
 
 namespace Bolt\Extension\DanielKulbe\Shariff;
 
-use Guzzle\Common\Event;
-use Guzzle\Stream\Stream;
-use GuzzleHttp\Message\Response;
-
+/**
+ * Class Pinterest.
+ */
 class Pinterest extends Request implements ServiceInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'pinterest';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRequest($url)
     {
-        $url = 'http://api.pinterest.com/v1/urls/count.json?callback=x&url='.urlencode($url);
-        $request = $this->createRequest($url);
-        $request->getEventDispatcher()->addListener('request.complete', function (Event $e) {
-            // Stripping the 'callback function' from the response
-            $body = $e['request']->getResponse()->getBody(true);
-            $e['request']->setResponse(new Response(200, array(), mb_substr($body, 2, mb_strlen($body) - 3)));
-        });
-        return $request;
+        return new \GuzzleHttp\Message\Request(
+            'GET',
+            'http://api.pinterest.com/v1/urls/count.json?callback=x&url='.urlencode($url)
+        );
     }
 
-    public function extractCount($data)
+    /**
+     * {@inheritdoc}
+     */
+    public function filterResponse($content)
     {
-        return $data['count'];
+        return mb_substr($content, 2, mb_strlen($content) - 3);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function extractCount(array $data)
+    {
+        return isset($data['count']) ? $data['count'] : 0;
     }
 }

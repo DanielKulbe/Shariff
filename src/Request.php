@@ -2,26 +2,35 @@
 
 namespace Bolt\Extension\DanielKulbe\Shariff;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 abstract class Request
 {
-    /** @var Client */
+    /** @var ClientInterface */
     protected $client;
 
     /** @var array */
     protected $config;
 
-    public function __construct(Client $client)
+    /**
+     * @param ClientInterface $client
+     */
+    public function __construct(ClientInterface $client)
     {
         $this->client = $client;
     }
 
-    protected function createRequest($url, $method = 'GET')
+    /**
+     * {@inheritdoc}
+     */
+    public function filterResponse($content)
     {
-        return $this->client->createRequest( $method, $url );
+        return $content;
     }
 
+    /**
+     * @param array $config
+     */
     public function setConfig(array $config)
     {
         $this->config = $config;
